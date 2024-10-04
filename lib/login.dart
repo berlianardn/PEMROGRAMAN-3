@@ -1,21 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/beranda.dart';
 import 'signup.dart'; // Import halaman SignUpPage
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  void_tampil(){
+    String username = _usernameController.text;
+    String pass = _passwordController.text;
+
+    Navigator.push(
+    context, MaterialPageRoute(builder: (context) => HomePage()),
+    );
+
+    showDialog(context: context, builder: (context){
+      return AlertDialog(
+        title: Text("Data Akun"),
+        content: Text("Username: $username\n Password: $pass"),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Login"),
-        backgroundColor: const Color.fromARGB(255, 216, 144, 139),
+        backgroundColor: Colors.blueGrey,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start, 
-          crossAxisAlignment: CrossAxisAlignment.center, 
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // Judul "Login"
             const Text(
@@ -26,7 +51,7 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            
+
             // Kalimat "Welcome Back"
             const Text(
               "Welcome Back",
@@ -48,8 +73,9 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 32),
 
             // TextField untuk Username
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              controller: _usernameController,
+              decoration: const InputDecoration(
                 prefixIcon: Icon(Icons.person),
                 labelText: 'Username',
                 hintText: 'Masukkan Username Anda',
@@ -59,9 +85,10 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 16),
 
             // TextField untuk Password
-            const TextField(
+            TextField(
+              controller: _passwordController,
               obscureText: true,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 prefixIcon: Icon(Icons.lock),
                 labelText: 'Password',
                 hintText: 'Masukkan Password Anda',
@@ -74,12 +101,12 @@ class LoginPage extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  // Aksi ketika tombol login ditekan
+                void_tampil();
                 },
                 child: const Text('Login'),
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(200, 50), // Mengatur ukuran tombol
-                  backgroundColor: const Color.fromARGB(255, 216, 144, 139), 
+                  backgroundColor: Colors.blueGrey,
                 ),
               ),
             ),

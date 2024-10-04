@@ -1,15 +1,39 @@
 import 'package:flutter/material.dart';
 import 'login.dart'; // Import halaman LoginPage
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
   @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPassController = TextEditingController();
+
+  void_tampil(){
+    String username = _usernameController.text;
+    String email = _emailController.text;
+    String pass = _passwordController.text;
+    String cpw = _confirmPassController.text;
+
+    showDialog(context: context, builder: (context){
+      return AlertDialog(
+        title: Text("Data Akun"),
+        content: Text("Username: $username\n Email: $email\n Password: $pass\n Confirm: $cpw"),
+      );
+    });
+  }
+  @override
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Sign Up"),
-        backgroundColor: const Color.fromARGB(255, 216, 144, 139),
+        backgroundColor: Colors.blueGrey,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -38,7 +62,8 @@ class SignUpPage extends StatelessWidget {
             const SizedBox(height: 32),
 
             // Form Sign Up
-            const TextField(
+            TextField(
+              controller: _usernameController,
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.person),
                 labelText: 'Username',
@@ -47,7 +72,8 @@ class SignUpPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            const TextField(
+            TextField(
+              controller: _emailController,
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.email),
                 labelText: 'Email',
@@ -56,7 +82,8 @@ class SignUpPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            const TextField(
+            TextField(
+              controller: _passwordController,
               obscureText: true,
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.lock),
@@ -66,7 +93,8 @@ class SignUpPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            const TextField(
+            TextField(
+              controller: _confirmPassController,
               obscureText: true,
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.lock_outline),
@@ -80,12 +108,12 @@ class SignUpPage extends StatelessWidget {
             // Tombol Sign Up
             ElevatedButton(
               onPressed: () {
-                // Aksi ketika tombol sign-up ditekan
+              void_tampil();
               },
               child: const Text('Sign Up'),
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(200, 50), 
-                backgroundColor:  const Color.fromARGB(255, 216, 144, 139), 
+                backgroundColor:  Colors.blueGrey,
               ),
             ),
             const SizedBox(height: 16),
@@ -107,7 +135,7 @@ class SignUpPage extends StatelessWidget {
               icon: const Icon(Icons.g_mobiledata),
               label: const Text('Sign Up with Google'),
               style: ElevatedButton.styleFrom(
-                backgroundColor:  const Color.fromARGB(255, 216, 144, 139), 
+                backgroundColor:  Colors.blueGrey, 
                 foregroundColor: Colors.black,
                 minimumSize: const Size(200, 50), 
 
